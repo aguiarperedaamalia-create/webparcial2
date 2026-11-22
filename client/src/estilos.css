@@ -1,0 +1,568 @@
+/* Versión "Mostrador": menú lateral, tablas y fichas. Tema claro. */
+
+:root {
+  --fondo: #f5f3ee;
+  --papel: #ffffff;
+  --tinta: #1f2a28;
+  --tenue: #66716e;
+  --linea: #dcd8cf;
+  --marca: #17413b;
+  --acento: #0f766e;
+  --peligro: #b3261e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.7rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+a {
+  color: var(--acento);
+}
+
+.tenue {
+  color: var(--tenue);
+  font-size: 0.9rem;
+}
+
+/* ---------- Marco ---------- */
+
+.marco {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+.lateral {
+  background: var(--marca);
+  color: #e6efec;
+  padding: 1.5rem 1rem;
+}
+
+.marca {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  margin: 0 0 2rem 0.5rem;
+}
+
+.marca span {
+  display: block;
+  font: 0.75rem system-ui, sans-serif;
+  opacity: 0.7;
+}
+
+.lateral nav {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.lateral nav a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+}
+
+.lateral nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lateral nav a.active {
+  background: #e6efec;
+  color: var(--marca);
+  font-weight: 600;
+}
+
+.contenido {
+  padding: 2rem 2.5rem;
+  max-width: 1150px;
+  width: 100%;
+}
+
+.estrecho {
+  max-width: 640px;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+/* ---------- Botones y formularios ---------- */
+
+.boton {
+  display: inline-block;
+  font: inherit;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--papel);
+  color: var(--tinta);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  border-color: var(--tenue);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.boton-principal {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: #fff;
+}
+
+.boton-peligro {
+  color: var(--peligro);
+  border-color: var(--peligro);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.formulario {
+  display: grid;
+  gap: 1rem;
+}
+
+.formulario label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--tenue);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  font: inherit;
+  color: var(--tinta);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--papel);
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.boton:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+}
+
+fieldset {
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+  background: var(--papel);
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 0.4rem;
+}
+
+.opciones {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.opciones label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--tinta);
+}
+
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.pieza {
+  display: grid;
+  grid-template-columns: 1fr 80px 110px auto;
+  gap: 0.5rem;
+}
+
+.total {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.aviso {
+  background: #fdecea;
+  border: 1px solid #f1b5b0;
+  color: #7a1c16;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+.filtros {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Resumen ---------- */
+
+.tarjetas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.tarjeta {
+  display: block;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-left: 4px solid var(--acento);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--tinta);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.tarjeta strong {
+  display: block;
+  font: 600 1.9rem Georgia, serif;
+}
+
+.tarjeta-rechazada,
+.tarjeta-cancelada {
+  border-left-color: var(--tenue);
+}
+
+.tarjeta-entregada {
+  border-left-color: #3f7d3a;
+}
+
+/* ---------- Tablas ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tenue);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--tinta);
+  border-bottom: 0;
+}
+
+/* ---------- Insignias de etapa ---------- */
+
+.insignia {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #e3e8e6;
+  color: #33403d;
+}
+
+.insignia-solicitada {
+  background: #e4ecf7;
+  color: #1d4f91;
+}
+.insignia-en_diagnostico {
+  background: #efe6f7;
+  color: #5b2b8a;
+}
+.insignia-presupuestada {
+  background: #fdf1d3;
+  color: #7a5200;
+}
+.insignia-aprobada {
+  background: #d9f0ee;
+  color: #0b5c56;
+}
+.insignia-en_reparacion {
+  background: #fde5d4;
+  color: #8a3d0c;
+}
+.insignia-lista {
+  background: #dcf2d9;
+  color: #24621f;
+}
+.insignia-entregada {
+  background: #24621f;
+  color: #fff;
+}
+.insignia-rechazada,
+.insignia-cancelada {
+  background: #f3dedc;
+  color: #7a1c16;
+}
+
+/* ---------- Ficha de la orden ---------- */
+
+.progreso ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.progreso li {
+  font-size: 0.8rem;
+  padding: 0.5rem 0.4rem;
+  border-top: 4px solid var(--linea);
+  color: var(--tenue);
+}
+
+.progreso li span {
+  display: block;
+  font-weight: 700;
+}
+
+.progreso li.hecha {
+  border-top-color: var(--acento);
+  color: var(--tinta);
+}
+
+.progreso li.actual {
+  border-top-color: var(--acento);
+  background: #d9f0ee;
+  color: var(--marca);
+  font-weight: 700;
+}
+
+.progreso li.detenida {
+  border-top-color: var(--peligro);
+  color: var(--peligro);
+  font-weight: 700;
+}
+
+.ficha {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.panel {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel table {
+  border: 0;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0 0 1rem;
+}
+
+dt {
+  color: var(--tenue);
+  font-size: 0.9rem;
+}
+
+dd {
+  margin: 0;
+}
+
+.diagnostico {
+  margin-top: 0;
+}
+
+.fotos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.fotos img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--linea);
+  display: block;
+}
+
+.fotos figure {
+  margin: 0;
+  position: relative;
+}
+
+.fotos figure button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.agregar-foto {
+  width: 96px;
+  height: 96px;
+  border: 2px dashed var(--linea);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--tenue);
+  font: inherit;
+  cursor: pointer;
+}
+
+.historial {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--linea);
+}
+
+.historial li {
+  position: relative;
+  padding: 0 0 1rem 0.75rem;
+}
+
+.historial li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1rem - 6px);
+  top: 0.4rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--acento);
+}
+
+.historial strong,
+.historial time {
+  display: block;
+}
+
+.historial time {
+  color: var(--tenue);
+  font-size: 0.85rem;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+
+@media (max-width: 800px) {
+  .marco {
+    grid-template-columns: 1fr;
+  }
+  .lateral nav {
+    grid-auto-flow: column;
+  }
+  .marca {
+    margin-bottom: 1rem;
+  }
+  .contenido {
+    padding: 1.25rem;
+  }
+  .ficha,
+  .filtros,
+  .dos-columnas {
+    grid-template-columns: 1fr;
+  }
+  .pieza {
+    grid-template-columns: 1fr 1fr;
+  }
+  .progreso ol {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
